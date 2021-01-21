@@ -10,9 +10,13 @@ function useVisualMode(initial) {
     setMode(mode);
   }
   const back = () => {
-    history.pop();
+    let old = history.pop();
     let last = history.length - 1;
-    setMode(history[last])
+    if (last < 0) {
+      setMode(old)
+    } else {
+      setMode(history[last])
+    }
     console.log("HISTORY 16", history[last])
   };
   return { mode, transition, back }
