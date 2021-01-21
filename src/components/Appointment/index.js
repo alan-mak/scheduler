@@ -4,9 +4,7 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 
-
 import "components/Appointment/styles.scss"
-import { action } from "@storybook/addon-actions";
 
 export default function Appointment(props) {
   const interview = props.interview
