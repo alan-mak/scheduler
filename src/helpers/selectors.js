@@ -1,4 +1,4 @@
-export function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
   //... returns an array of appointments for that day
   let result = []
   const filtered = state.days.filter(obj => obj.name === day);
@@ -15,3 +15,18 @@ export function getAppointmentsForDay(state, day) {
   }
   return result;
 }
+
+function getInterview(state, day) {
+  if(!day) {
+    return null;
+  }
+  const result = {student: day.student}
+  for (let interviewer in state.interviewers) {
+    if (day.interviewer === state.interviewers[interviewer].id) {
+      result["interviewer"] = state.interviewers[interviewer]
+    }
+  }
+  return result;
+}
+
+export { getAppointmentsForDay, getInterview }

@@ -29,6 +29,7 @@ export default function Application(props) {
       axios.get('/api/interviewers')
     ])
       .then((all) => {
+        console.log(all)
         // Update what was got in the promise above
         setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }))
       })
@@ -58,7 +59,13 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
-          return <Appointment key={appointment.id} {...appointment} />
+          // const interview = getInterview(state, appointment.interview)
+          return <Appointment
+            key={appointment.id}
+            id={appointment.id}
+            time={appointment.time}
+            // interview={interview}
+          />
         })}
         <Appointment key="last" time="5pm" />
       </section>
