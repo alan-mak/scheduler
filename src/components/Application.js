@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "./DayList"
 import Appointment from 'components/Appointment'
-import {getAppointmentsForDay} from '../helpers/selectors'
+import { getAppointmentsForDay } from '../helpers/selectors'
 
 const axios = require('axios');
 
@@ -17,26 +17,26 @@ export default function Application(props) {
     appointments: {}
   })
 
-  const dailyAppointments = getAppointmentsForDay(state, state.day)
+  // State is updating everytime a new day is pressed
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   useEffect(() => {
-    
+
     Promise.all([
+      // https://localhost:8001 not needed due to proxy added in package.json
       axios.get('/api/days'),
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ])
-    .then((all) => {
-      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
-      dailyAppointments.concat(all[1].data)
-    })
-    
-  }, [])
+      .then((all) => {
+        // Update what was got in the promise above
+        setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }))
+      })
+  }, []);
 
   return (
     <main className="layout">
       <section className="sidebar">
-        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
         <img
           className="sidebar--centered"
           src="images/logo.png"
@@ -57,9 +57,8 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
         {dailyAppointments.map(appointment => {
-          return <Appointment key={appointment.id} {...appointment}/>
+          return <Appointment key={appointment.id} {...appointment} />
         })}
         <Appointment key="last" time="5pm" />
       </section>
