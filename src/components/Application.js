@@ -22,12 +22,10 @@ export default function Application(props) {
       ...state.appointments[id],
       interview: { ...interview }
     }
-    console.log("ID",appointment);
     const appointments = {
       ...state.appointments,
       [id]: appointment
     }
-    console.log("Inter", appointments)
     return axios.put(`/api/appointments/${id}`, { interview }) 
     .then (() => {
       setState({...state, appointments})
@@ -35,17 +33,14 @@ export default function Application(props) {
   }
 
   function cancelInterview(id) {
-    console.log("ID, 39", id)
     const appointment = {
       ...state.appointments[id],
       interview: null 
     }
-    console.log("Line 43", appointment)
     const appointments = {
       ...state.appointments,
       [id]: appointment
     }
-    console.log("Line 48", appointments)
     return axios.delete(`/api/appointments/${id}`)
     .then (() => {
       setState({...state, appointments})
