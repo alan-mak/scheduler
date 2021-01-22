@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "./DayList"
 import Appointment from 'components/Appointment'
-import { getAppointmentsForDay, getInterview } from '../helpers/selectors'
+import { getAppointmentsForDay, getInterviewersForDay, getInterview } from '../helpers/selectors'
 
 const axios = require('axios');
 
@@ -18,7 +18,9 @@ export default function Application(props) {
   })
 
   // State is updating everytime a new day is pressed
+  const dailyInterviewers = getInterviewersForDay(state, state.day)
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+
 
   useEffect(() => {
 
@@ -29,7 +31,6 @@ export default function Application(props) {
       axios.get('/api/interviewers')
     ])
       .then((all) => {
-        console.log(all)
         // Update what was got in the promise above
         setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }))
       })
@@ -65,6 +66,7 @@ export default function Application(props) {
             id={appointment.id}
             time={appointment.time}
             interview={interview}
+            interviewers={dailyInterviewers}
           />
         })}
         <Appointment key="last" time="5pm" />
