@@ -17,6 +17,24 @@ export default function Application(props) {
     appointments: {}
   })
 
+  function bookInterview(id, interview) {
+    console.log("ID",id);
+    console.log("Inter", interview)
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+    return axios.put(`/api/appointments/${id}`, { interview }) 
+    .then ((response) => {
+      console.log("RES", response)
+      setState({...state, appointments})
+    })
+  }
+
   // State is updating everytime a new day is pressed
   const dailyInterviewers = getInterviewersForDay(state, state.day)
   const dailyAppointments = getAppointmentsForDay(state, state.day);
@@ -62,11 +80,12 @@ export default function Application(props) {
         {dailyAppointments.map(appointment => {
           const interview = getInterview(state, appointment.interview)
           return <Appointment
-            key={appointment.id}
-            id={appointment.id}
-            time={appointment.time}
-            interview={interview}
-            interviewers={dailyInterviewers}
+          key={appointment.id}
+          id={appointment.id}
+          time={appointment.time}
+          interview={interview}
+          interviewers={dailyInterviewers}
+          bookInterview={bookInterview}
           />
         })}
         <Appointment key="last" time="5pm" />
