@@ -38,11 +38,9 @@ function useApplicationData() {
       [id]: appointment
     }
 
-    console.log("HERE", state.days)
-
     // Find the day object using the name
-    const day = state.days.find( obj => obj.name === state.day)
-    console.log("34", getSpotsForDay(state, state.day))
+    const day = state.days.find( obj => obj.name === state.day);
+
     //Repopulating array with state.days data
     const days = [...state.days];
 
@@ -51,8 +49,6 @@ function useApplicationData() {
       ...state.days[day.id -1],
       spots: (getSpotsForDay(state, state.day) - 1)
     }
-    console.log("41", days)
-
     //Supposed to send the data to api
     return axios.put(`/api/appointments/${id}`, { interview })
     .then(() => {
@@ -70,8 +66,21 @@ function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
+
+    // Find the day object using the name
+    const day = state.days.find( obj => obj.name === state.day);
+
+    //Repopulating array with state.days data
+    const days = [...state.days];
+
+    //Update with new spots data
+    days[day.id - 1] = {
+      ...state.days[day.id -1],
+      spots: (getSpotsForDay(state, state.day) + 1)
+    }
+
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments }))
+      .then(() => setState({ ...state, appointments, days }))
   }
 
   return { cancelInterview, bookInterview, setDay, state };
