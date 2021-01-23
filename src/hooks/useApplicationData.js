@@ -37,7 +37,6 @@ function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     }
-
     // Find the day object using the name
     const day = state.days.find( obj => obj.name === state.day);
 
@@ -54,6 +53,21 @@ function useApplicationData() {
     .then(() => {
       // Logic that is updating the appointments and days components
       setState({ ...state, appointments, days })
+    })
+  }
+
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+    return axios.put(`/api/appointments/${id}`, { interview })
+    .then(() => {
+      setState({ ...state, appointments })
     })
   }
 
@@ -83,7 +97,7 @@ function useApplicationData() {
       .then(() => setState({ ...state, appointments, days }))
   }
 
-  return { cancelInterview, bookInterview, setDay, state };
+  return { cancelInterview, bookInterview, setDay, state, editInterview };
 }
 
 export default useApplicationData;
