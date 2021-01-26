@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { getSpotsForDay } from '../helpers/selectors'
 
-const axios = require('axios')
+import axios from 'axios' 
 
 function useApplicationData() {
 
