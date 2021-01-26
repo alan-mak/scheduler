@@ -53,7 +53,7 @@ describe("Form", () => {
   
     fireEvent.click(getByText("Save"));
   
-    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+    expect(getByText(/Student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
   
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
@@ -62,10 +62,10 @@ describe("Form", () => {
   
     fireEvent.click(getByText("Save"));
   
-    expect(queryByText(/student name cannot be blank/i)).toBeNull();
+    expect(queryByText(/Student name cannot be blank/i)).toBeNull();
   
-    expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).not.toHaveBeenCalledTimes(1);
+    expect(onSave).not.toHaveBeenCalledWith("Lydia Miller-Jones", null);
   });
 
   it("calls onCancel and resets the input field", () => {
