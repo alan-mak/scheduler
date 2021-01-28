@@ -26,11 +26,13 @@ npm test
 npm run storybook
 ```
 
-## Adding an appointment
+## Features
+
+### Adding an appointment
 ![Add](https://github.com/alan-mak/scheduler/blob/master/docs/InterviewScheduler-add.gif)
 
-## Editing an appointment
+### Editing an appointment
 ![Edit](https://github.com/alan-mak/scheduler/blob/master/docs/InterviewScheduler-edit.gif)
 
-## Deleting an appointment
+### Deleting an appointment
 ![Edit](https://github.com/alan-mak/scheduler/blob/master/docs/InterviewScheduler-delete.gif)
