@@ -20,7 +20,7 @@ describe("Appointments", () => {
     // Sees the booked appointment
     cy.contains(".appointment__card--show", "Lydia Miller-Jones");
     cy.contains(".appointment__card--show", "Sylvia Palmer");
-  })
+  });
   it("should cancel an interview", () => {
     // Clicks the delete button for the existing appointment
     cy.get("[alt=Delete]").click({ force: true });
@@ -29,7 +29,7 @@ describe("Appointments", () => {
     // Sees that the appointment slot is empty
     cy.contains("Deleting").should("exist");
     cy.contains("Deleting").should("not.exist");
-  })
+  });
   it("should edit an interview", () => {
     // Clicks the edit button for the existing appointment
     cy.get("[alt=Edit]").click({ force: true });
@@ -41,5 +41,5 @@ describe("Appointments", () => {
     // Sees the edit to the appointment
     cy.contains(".appointment__card--show", "Lydia Miller-Jones");
     cy.contains(".appointment__card--show", "Tori Malcolm");
-  })
+  });
 });

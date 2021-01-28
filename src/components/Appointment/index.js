@@ -6,9 +6,9 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Confirm from "./Confirm";
 import Error from "./Error";
-import useVisualMode from "../../hooks/useVisualMode"
+import useVisualMode from "../../hooks/useVisualMode";
 
-import "components/Appointment/styles.scss"
+import "components/Appointment/styles.scss";
 import Status from "./Status";
 
 export default function Appointment(props) {
@@ -21,27 +21,27 @@ export default function Appointment(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
-  const interview = props.interview
+  const interview = props.interview;
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
-  )
+  );
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-    transition(SAVING)
+    transition(SAVING);
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch((error) => transition(ERROR_SAVE, true))
-  }
+  };
 
   function erase() {
-    transition(DELETING, true)
+    transition(DELETING, true);
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch((error) => transition(ERROR_DELETE, true))
-  }
+  };
 
   return (
     <article className="appointment" data-testid="appointment">
@@ -94,5 +94,5 @@ export default function Appointment(props) {
         onCancel={back}
       />)}
     </article>
-  )
-}
+  );
+};

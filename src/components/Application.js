@@ -1,10 +1,10 @@
 import React from "react";
 
 import "components/Application.scss";
-import DayList from "./DayList"
-import Appointment from 'components/Appointment'
-import { getAppointmentsForDay, getInterviewersForDay, getInterview } from '../helpers/selectors'
-import useApplicationData from "../hooks/useApplicationData"
+import DayList from "./DayList";
+import Appointment from 'components/Appointment';
+import { getAppointmentsForDay, getInterviewersForDay, getInterview } from '../helpers/selectors';
+import useApplicationData from "../hooks/useApplicationData";
 
 
 export default function Application(props) {
@@ -18,11 +18,11 @@ export default function Application(props) {
 
 
   // State is updating everytime a new day is pressed
-  const dailyInterviewers = getInterviewersForDay(state, state.day)
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const appointments = dailyAppointments.map(appointment => {
-    const interview = getInterview(state, appointment.interview)
+    const interview = getInterview(state, appointment.interview);
     return <Appointment
       key={appointment.id}
       id={appointment.id}
@@ -62,4 +62,4 @@ export default function Application(props) {
       </section>
     </main>
   );
-}
+};

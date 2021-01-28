@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { getSpotsForDay } from '../helpers/selectors'
+import { getSpotsForDay } from '../helpers/selectors';
 
-import axios from 'axios' 
+import axios from 'axios';
 
 function useApplicationData() {
 
@@ -12,7 +12,7 @@ function useApplicationData() {
     day: "Monday",
     days: [],
     appointments: {}
-  })
+  });
   useEffect(() => {
     Promise.all([
       // https://localhost:8001 not needed due to proxy added in package.json
@@ -24,19 +24,19 @@ function useApplicationData() {
         // Update what was got in the promise above
         setState(prev => ({
           ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data
-        }))
-      })
+        }));
+      });
   }, []);
 
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
-    }
+    };
     const appointments = {
       ...state.appointments,
       [id]: appointment
-    }
+    };
 
     // Find the day object using the name
     const day = state.days.find(obj => obj.name === state.day);
@@ -45,30 +45,30 @@ function useApplicationData() {
     const days = [...state.days];
 
     //Logic To see if editing
-    if(!state.appointments[id].interview){
-        days[day.id - 1] = {
-          ...state.days[day.id - 1],
-          spots: (getSpotsForDay(state, state.day) - 1)
-        }
-    }
-    
+    if (!state.appointments[id].interview) {
+      days[day.id - 1] = {
+        ...state.days[day.id - 1],
+        spots: (getSpotsForDay(state, state.day) - 1)
+      };
+    };
+
     //Supposed to send the data to api
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
         // Logic that is updating the appointments and days components
         setState({ ...state, appointments, days })
-      })
-  }
+      });
+  };
 
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
       interview: null
-    }
+    };
     const appointments = {
       ...state.appointments,
       [id]: appointment
-    }
+    };
 
     // Find the day object using the name
     const day = state.days.find(obj => obj.name === state.day);
@@ -80,13 +80,13 @@ function useApplicationData() {
     days[day.id - 1] = {
       ...state.days[day.id - 1],
       spots: (getSpotsForDay(state, state.day) + 1)
-    }
+    };
 
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments, days }))
-  }
+      .then(() => setState({ ...state, appointments, days }));
+  };
 
   return { cancelInterview, bookInterview, setDay, state };
-}
+};
 
 export default useApplicationData;
