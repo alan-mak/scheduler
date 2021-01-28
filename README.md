@@ -27,10 +27,10 @@ npm run storybook
 ```
 
 ## Adding an appointment
-![Add]()
+![Add](https://github.com/alan-mak/scheduler/blob/master/docs/InterviewScheduler-add.gif)
 
 ## Editing an appointment
-![Edit]()
+![Edit](https://github.com/alan-mak/scheduler/blob/master/docs/InterviewScheduler-edit.gif)
 
 ## Deleting an appointment
-![Edit]()
+![Edit](https://github.com/alan-mak/scheduler/blob/master/docs/InterviewScheduler-delete.gif)
