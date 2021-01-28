@@ -1,5 +1,9 @@
 # Interview Scheduler
 
+A full-stack web app built using ReactJS to simulate appointment booking. Tested using Storybook, Jest and Cypress. The app is deployed using Heroku, CircleCI and Netlify.
+
+### [View Scheduler Online Here](https://60122a02e095760008141cd0--hopeful-boyd-97548c.netlify.app/)
+
 ## Setup
 
 Install dependencies with `npm install`.
@@ -21,3 +25,12 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Adding an appointment
+![Add]()
+
+## Editing an appointment
+![Edit]()
+
+## Deleting an appointment
+![Edit]()
